@@ -7,9 +7,16 @@ public class DamageHandler : MonoBehaviour
     public int health = 1;
     float invulnerability = 0;
     int correctLayer;
-
+    SpriteRenderer spriteRenderer;
     void Start(){
         correctLayer = gameObject.layer;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if(spriteRenderer == null){
+            spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
+            if(spriteRenderer == null){
+            Debug.Log("Error'"+gameObject.name+"' has no sprite renderer");
+        }
+    }
     }
     void OnTriggerEnter2D(){
         Debug.Log("Trigger!");
