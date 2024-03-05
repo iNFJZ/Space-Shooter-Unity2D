@@ -7,9 +7,10 @@ public class DamageHandler : MonoBehaviour
     public int health = 1;
     float invulnerability = 0;
     int correctLayer;
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
     void Start(){
         correctLayer = gameObject.layer;
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         if(spriteRenderer == null){
             spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
@@ -29,6 +30,13 @@ public class DamageHandler : MonoBehaviour
         invulnerability -= Time.deltaTime;
         if(invulnerability <= 0){
             gameObject.layer = correctLayer;
+            if(spriteRenderer != null){
+                spriteRenderer.enabled = true;
+            }
+        }else{
+            if(spriteRenderer != null){
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+            }
         }
         if(health <= 0){
             Die();
